@@ -57,11 +57,65 @@
   document.getElementById("explore-note").textContent = destinations.length === 1
     ? `目前仅加入 1 个网址，逛一逛将前往${destinations[0].name}。`
     : `逛一逛：从全部 ${destinations.length} 个已加入的网址中等概率随机选择，也可能遇见刚刚去过的学校。`;
+  const departureOverlay = document.createElement("div");
+  departureOverlay.className = "departure-overlay";
+  departureOverlay.hidden = true;
+  departureOverlay.innerHTML = '<div class="departure-stage">' +
+    '<video class="departure-video" src="./transit.mp4" playsinline preload="auto"></video>' +
+    '<div class="departure-fallback" hidden><img class="departure-mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048"><p class="departure-text">正在打开，稍等片刻…</p></div>' +
+    '<button type="button" class="departure-skip">跳过动画</button></div>';
+  document.body.append(departureOverlay);
+  let activeFinish = null;
+  departureOverlay.querySelector(".departure-skip").addEventListener("click", () => { if (activeFinish) activeFinish(); });
+  const playDeparture = (school, onDone) => {
+    const video = departureOverlay.querySelector(".departure-video");
+    const fallback = departureOverlay.querySelector(".departure-fallback");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const MIN_MS = reduced ? 300 : 1200; // 转场最短停留时长，避免一闪而过
+    let done = false; let minTimer = 0; let fallbackTimer = 0; let probe = null;
+    let minDone = false; let probeDone = reduced;
+    const finish = () => {
+      if (done) return; done = true;
+      clearTimeout(minTimer); clearTimeout(fallbackTimer); video.pause();
+      if (probe) { probe.remove(); probe = null; }
+      departureOverlay.hidden = true; activeFinish = null; onDone();
+    };
+    const tryFinish = () => { if (minDone && probeDone) finish(); };
+    const useFallback = () => {
+      video.hidden = true; fallback.hidden = false;
+      fallbackTimer = setTimeout(finish, reduced ? 600 : 2400);
+    };
+    activeFinish = finish;
+    video.hidden = false; fallback.hidden = true;
+    departureOverlay.hidden = false;
+    video.onended = finish;
+    video.onerror = useFallback;
+    video.play().then(() => {}).catch(() => { video.muted = true; video.play().catch(useFallback); });
+    minTimer = setTimeout(() => { minDone = true; tryFinish(); }, MIN_MS);
+    if (!reduced) {
+      // 后台预检目标官网：加载完成或失败都视为检测结束，随后关闭动画并转跳
+      probe = document.createElement("iframe");
+      probe.setAttribute("aria-hidden", "true");
+      probe.setAttribute("tabindex", "-1");
+      probe.setAttribute("sandbox", "");
+      probe.style.cssText = "position:fixed;left:-10000px;top:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
+      probe.addEventListener("load", () => { probeDone = true; tryFinish(); }, { once: true });
+      probe.addEventListener("error", () => { probeDone = true; tryFinish(); }, { once: true });
+      probe.src = school.url;
+      document.body.append(probe);
+    }
+  };
   const visit = (school, random = false) => {
-    const link = document.createElement("a"); link.href = school.url; link.target = "_blank"; link.rel = "noopener noreferrer";
-    link.hidden = true; document.body.append(link); link.click(); link.remove();
-    status.textContent = `${random ? `这次奶蛙选中了${school.name}。` : ""}若官网没有打开，请点击：`;
-    const fallback = document.createElement("a"); fallback.href = school.url; fallback.target = "_blank"; fallback.rel = "noopener noreferrer"; fallback.textContent = `${school.name}官网 ↗`; status.append(fallback);
+    playDeparture(school, () => {
+      const link = document.createElement("a");
+      link.href = school.url; link.target = "_blank"; link.rel = "noopener noreferrer";
+      link.hidden = true; document.body.append(link); link.click(); link.remove();
+      status.textContent = `${random ? `这次奶蛙选中了${school.name}。` : ""}若官网没有打开，请点击：`;
+      const fallbackLink = document.createElement("a");
+      fallbackLink.href = school.url; fallbackLink.target = "_blank"; fallbackLink.rel = "noopener noreferrer";
+      fallbackLink.textContent = `${school.name}官网 ↗`;
+      status.append(fallbackLink);
+    });
   };
   form.addEventListener("change", updateSelection);
   form.addEventListener("submit", event => {

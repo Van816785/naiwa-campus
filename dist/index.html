@@ -39,26 +39,34 @@
       </section>
 
       <section id="destinations" class="destinations" aria-labelledby="destinations-title">
-        <div class="section-heading"><div><span class="section-index">01 /</span><h2 id="destinations-title">选择你的目的地</h2></div><p id="school-count">学校官网入口</p></div>
+        <h2 id="destinations-title" class="sr-only">选择你的目的地</h2>
         <form id="destination-form" hidden>
-          <div class="departure-bar">
-            <div class="selection-summary"><span class="direction-icon" aria-hidden="true">↗</span><div><span class="summary-label">即将前往</span><p id="selected-name"></p><span id="selected-domain" class="selected-domain"></span></div></div>
-            <div class="departure-action">
-              <div class="departure-buttons">
-                <button type="button" id="explore-button" class="explore-button" aria-describedby="explore-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h2c5 0 9 12 14 12h2m-4-4 4 4-4 4M3 18h2c1.8 0 3.5-1.5 5.2-3.7M14 9.7C15.7 7.5 17.3 6 19 6h2m-4-4 4 4-4 4"/></svg><span>逛一逛</span></button>
-                <button type="submit" class="depart-button"><span>出发，访问官网</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
-              </div>
-              <span class="new-tab-note">在新标签页打开，随时回来继续探索</span>
+          <div class="wander-panel">
+            <div class="wander-copy">
+              <span class="panel-tag">随机池</span>
+              <h3 class="wander-title">逛一逛 · 让奶蛙替你决定</h3>
+              <p id="explore-note" class="explore-note"></p>
+            </div>
+            <div class="wander-action">
+              <button type="button" id="explore-button" class="explore-button" aria-describedby="explore-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h2c5 0 9 12 14 12h2m-4-4 4 4-4 4M3 18h2c1.8 0 3.5-1.5 5.2-3.7M14 9.7C15.7 7.5 17.3 6 19 6h2m-4-4 4 4-4 4"/></svg><span>逛一逛</span></button>
+              <span class="new-tab-note">随机打开一所已收录的学校官网</span>
             </div>
           </div>
-          <p id="explore-note" class="explore-note"></p>
-          <p id="navigation-status" class="navigation-status" role="status" aria-live="polite"></p>
-          <div class="school-search-row">
-            <label class="school-search"><span aria-hidden="true">⌕</span><span class="sr-only">搜索学校名称或网址</span><input id="school-search" type="search" placeholder="搜索学校名称或网址" autocomplete="off" aria-controls="school-grid"></label>
-            <span id="search-count" class="search-count" role="status"></span>
+          <div class="select-panel">
+            <div class="panel-head"><span class="panel-tag">选择目的地</span><p id="school-count" class="panel-count">学校官网入口</p></div>
+            <div class="select-panel-head">
+              <div class="selection-summary"><span class="direction-icon" aria-hidden="true">↗</span><div><span class="summary-label">即将前往</span><p id="selected-name"></p><span id="selected-domain" class="selected-domain"></span></div></div>
+              <button type="submit" class="depart-button"><span>出发，访问官网</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+            </div>
+            <span class="new-tab-note">先播放出发动画，再前往官网；返回即可继续探索</span>
+            <div class="school-search-row">
+              <label class="school-search"><span aria-hidden="true">⌕</span><span class="sr-only">搜索学校名称或网址</span><input id="school-search" type="search" placeholder="搜索学校名称或网址" autocomplete="off" aria-controls="school-grid"></label>
+              <span id="search-count" class="search-count" role="status"></span>
+            </div>
+            <fieldset><legend class="sr-only">选择要访问的学校官网</legend><div id="school-grid" class="school-grid"></div></fieldset>
+            <p id="no-results" class="no-results" hidden>没有找到匹配的学校，请换个关键词试试。</p>
           </div>
-          <fieldset><legend class="sr-only">选择要访问的学校官网</legend><div id="school-grid" class="school-grid"></div></fieldset>
-          <p id="no-results" class="no-results" hidden>没有找到匹配的学校，请换个关键词试试。</p>
+          <p id="navigation-status" class="navigation-status" role="status" aria-live="polite"></p>
         </form>
         <noscript><div class="fallback"><p>已为你准备好学校官网入口：</p><a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></div></noscript>
         <p id="load-error" class="fallback" hidden>学校列表暂时无法加载。你仍可<a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></p>
