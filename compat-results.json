@@ -1,0 +1,190 @@
+{
+  "baseline": {
+    "gestureActiveAtFinish": true,
+    "pagesAfterDelayedOpen": 2,
+    "originalStillOnNavigation": true
+  },
+  "results": [
+    {
+      "name": "Firefox",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "153.0",
+      "media": {
+        "currentTime": 0.258775,
+        "duration": 13.933984,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14169
+    },
+    {
+      "name": "WebKit desktop (not Safari application)",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "26.5",
+      "media": {
+        "currentTime": 0.4073958,
+        "duration": 13.934,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14310
+    },
+    {
+      "name": "Chrome for Testing",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "151.0.7922.34",
+      "media": {
+        "currentTime": 0.277267,
+        "duration": 13.933333,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14135
+    },
+    {
+      "name": "Microsoft Edge",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "155.0.4283.62",
+      "media": {
+        "currentTime": 0.303607,
+        "duration": 13.933333,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14130
+    },
+    {
+      "name": "iPhone WebKit emulation",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "26.5",
+      "media": {
+        "currentTime": 0.409375,
+        "duration": 13.934,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14345
+    },
+    {
+      "name": "Android Chrome emulation",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "151.0.7922.34",
+      "media": {
+        "currentTime": 0.30513,
+        "duration": 13.933333,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14116
+    },
+    {
+      "name": "WeChat UA on Android emulation (not actual WeChat)",
+      "checks": [
+        "43 schools, renamed brand, no horizontal overflow",
+        "natural video or codec fallback navigates in the same tab without popups",
+        "browser Back restores usable navigation",
+        "random ignores search, repeated presses guarded, video restarts, native skip link works",
+        "autoplay denied including muted retry still navigates",
+        "unresolved playback does not hang: loading timeout navigates",
+        "unconditional 16-second deadline navigates even without ended/error events",
+        "reduced-motion mode skips the video entirely",
+        "JavaScript-disabled fallback link works in the same tab",
+        "no JavaScript exceptions"
+      ],
+      "passed": true,
+      "version": "151.0.7922.34",
+      "media": {
+        "currentTime": 0.317196,
+        "duration": 13.933333,
+        "readyState": 4,
+        "paused": false,
+        "canPlayH264": "probably"
+      },
+      "naturalNavigationMs": 14102
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "WebKit is the Safari engine, not a macOS Safari application test.",
+    "Mobile profiles and WeChat user agent are emulation, not a real iPhone/Android/WeChat client.",
+    "External school responses are intercepted to test navigation; this does not certify destination uptime or WeChat external-link approval."
+  ]
+}

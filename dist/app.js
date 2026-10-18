@@ -60,61 +60,95 @@
   const departureOverlay = document.createElement("div");
   departureOverlay.className = "departure-overlay";
   departureOverlay.hidden = true;
+  departureOverlay.setAttribute("role", "dialog");
+  departureOverlay.setAttribute("aria-modal", "true");
+  departureOverlay.setAttribute("aria-label", "正在前往学校官网");
   departureOverlay.innerHTML = '<div class="departure-stage">' +
-    '<video class="departure-video" src="./transit.mp4" playsinline preload="auto"></video>' +
-    '<div class="departure-fallback" hidden><img class="departure-mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048"><p class="departure-text">正在打开，稍等片刻…</p></div>' +
-    '<button type="button" class="departure-skip">跳过动画</button></div>';
+    '<video class="departure-video" src="./transit.mp4" playsinline webkit-playsinline preload="metadata"></video>' +
+    '<div class="departure-fallback" hidden><img class="departure-mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048"><p class="departure-text">马上出发…</p></div>' +
+    '<a class="departure-skip" href="https://www.hnust.edu.cn/">跳过动画，直接前往</a></div>';
   document.body.append(departureOverlay);
-  let activeFinish = null;
-  departureOverlay.querySelector(".departure-skip").addEventListener("click", () => { if (activeFinish) activeFinish(); });
+  const skipLink = departureOverlay.querySelector(".departure-skip");
+  const visitButton = form.querySelector('button[type="submit"]');
+  const exploreButton = document.getElementById("explore-button");
+  let navigationBusy = false;
+  let activeCancel = null;
+  const setBusy = busy => {
+    navigationBusy = busy;
+    visitButton.disabled = busy; exploreButton.disabled = busy;
+  };
+  const resetDeparture = () => {
+    if (activeCancel) activeCancel();
+    departureOverlay.hidden = true; setBusy(false);
+  };
+  // 普通链接使用当前标签页，跳过入口不依赖弹窗权限或视频事件。
+  skipLink.addEventListener("click", resetDeparture);
+  window.addEventListener("pagehide", resetDeparture);
+  window.addEventListener("pageshow", event => { if (event.persisted) resetDeparture(); });
   const playDeparture = (school, onDone) => {
     const video = departureOverlay.querySelector(".departure-video");
     const fallback = departureOverlay.querySelector(".departure-fallback");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const MIN_MS = reduced ? 300 : 1200; // 转场最短停留时长，避免一闪而过
-    let done = false; let minTimer = 0; let fallbackTimer = 0; let probe = null;
-    let minDone = false; let probeDone = reduced;
+    if (reduced) { onDone(); return; }
+    let done = false; let waitingTimer = 0; let fallbackTimer = 0; let deadlineTimer = 0;
+    let fallbackShown = false;
+    const cleanup = () => {
+      clearTimeout(waitingTimer); clearTimeout(fallbackTimer); clearTimeout(deadlineTimer);
+      video.onended = video.onerror = video.onplaying = video.onwaiting = video.onstalled = video.ontimeupdate = null;
+      video.pause(); departureOverlay.hidden = true; activeCancel = null;
+    };
+    const cancel = () => { if (!done) { done = true; cleanup(); } };
     const finish = () => {
-      if (done) return; done = true;
-      clearTimeout(minTimer); clearTimeout(fallbackTimer); video.pause();
-      if (probe) { probe.remove(); probe = null; }
-      departureOverlay.hidden = true; activeFinish = null; onDone();
+      if (done) return;
+      done = true; cleanup(); onDone();
     };
-    const tryFinish = () => { if (minDone && probeDone) finish(); };
     const useFallback = () => {
+      if (done || fallbackShown) return;
+      fallbackShown = true; clearTimeout(waitingTimer); video.pause();
       video.hidden = true; fallback.hidden = false;
-      fallbackTimer = setTimeout(finish, reduced ? 600 : 2400);
+      fallbackTimer = setTimeout(finish, 700);
     };
-    activeFinish = finish;
+    const clearWaiting = () => { clearTimeout(waitingTimer); };
+    const armWaiting = () => {
+      clearWaiting();
+      if (!done && !fallbackShown) waitingTimer = setTimeout(useFallback, 3000);
+    };
+    activeCancel = cancel;
+    skipLink.href = school.url;
     video.hidden = false; fallback.hidden = true;
     departureOverlay.hidden = false;
+    try { video.currentTime = 0; } catch { /* 尚未载入媒体元数据时从默认起点播放。 */ }
     video.onended = finish;
     video.onerror = useFallback;
-    video.play().then(() => {}).catch(() => { video.muted = true; video.play().catch(useFallback); });
-    minTimer = setTimeout(() => { minDone = true; tryFinish(); }, MIN_MS);
-    if (!reduced) {
-      // 后台预检目标官网：加载完成或失败都视为检测结束，随后关闭动画并转跳
-      probe = document.createElement("iframe");
-      probe.setAttribute("aria-hidden", "true");
-      probe.setAttribute("tabindex", "-1");
-      probe.setAttribute("sandbox", "");
-      probe.style.cssText = "position:fixed;left:-10000px;top:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
-      probe.addEventListener("load", () => { probeDone = true; tryFinish(); }, { once: true });
-      probe.addEventListener("error", () => { probeDone = true; tryFinish(); }, { once: true });
-      probe.src = school.url;
-      document.body.append(probe);
-    }
+    video.onplaying = clearWaiting;
+    video.ontimeupdate = () => { if (!video.paused && video.currentTime > 0) clearWaiting(); };
+    video.onwaiting = armWaiting; video.onstalled = armWaiting;
+    // 保留约 14 秒的完整视频；无论媒体事件如何，16 秒内结束转场。
+    deadlineTimer = setTimeout(finish, 16000); armWaiting();
+    const startVideo = mutedRetry => {
+      if (done || fallbackShown) return;
+      try {
+        const playing = video.play();
+        if (playing && typeof playing.catch === "function") playing.catch(() => {
+          if (done || fallbackShown) return;
+          if (mutedRetry) { video.muted = true; startVideo(false); } else useFallback();
+        });
+      } catch { useFallback(); }
+    };
+    startVideo(true);
+    skipLink.focus({ preventScroll: true });
   };
   const visit = (school, random = false) => {
+    if (navigationBusy) return;
+    setBusy(true);
+    status.textContent = `${random ? `这次奶蛙选中了${school.name}。` : ""}若未自动跳转，可直接访问：`;
+    const fallbackLink = document.createElement("a");
+    fallbackLink.href = school.url; fallbackLink.textContent = `${school.name}官网 ↗`;
+    status.append(fallbackLink);
     playDeparture(school, () => {
-      const link = document.createElement("a");
-      link.href = school.url; link.target = "_blank"; link.rel = "noopener noreferrer";
-      link.hidden = true; document.body.append(link); link.click(); link.remove();
-      status.textContent = `${random ? `这次奶蛙选中了${school.name}。` : ""}若官网没有打开，请点击：`;
-      const fallbackLink = document.createElement("a");
-      fallbackLink.href = school.url; fallbackLink.target = "_blank"; fallbackLink.rel = "noopener noreferrer";
-      fallbackLink.textContent = `${school.name}官网 ↗`;
-      status.append(fallbackLink);
+      setBusy(false);
+      // 动画结束已离开点击事件的调用栈；当前页跳转不受弹窗拦截影响。
+      try { window.location.assign(school.url); } catch { fallbackLink.focus(); }
     });
   };
   form.addEventListener("change", updateSelection);
@@ -122,6 +156,7 @@
     event.preventDefault(); visit(currentSchool());
   });
   document.getElementById("explore-button").addEventListener("click", () => {
+    if (navigationBusy) return;
     const school = destinations[Math.floor(Math.random() * destinations.length)];
     search.value = ""; filterSchools();
     form.querySelectorAll('input[name="school"]')[schools.indexOf(school)].checked = true;

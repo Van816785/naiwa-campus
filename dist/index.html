@@ -7,9 +7,9 @@
   <meta name="description" content="中国奶蛙科技大学校园导航。选择学校官网，或点击逛一逛，随机探索一个已加入的网址。">
   <title>中国奶蛙科技大学 · 校园导航</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=mobile-fix-1">
   <script src="./schools.js" defer></script>
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=mobile-fix-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#destinations">跳到学校选择</a>
@@ -58,7 +58,7 @@
               <div class="selection-summary"><span class="direction-icon" aria-hidden="true">↗</span><div><span class="summary-label">即将前往</span><p id="selected-name"></p><span id="selected-domain" class="selected-domain"></span></div></div>
               <button type="submit" class="depart-button"><span>出发，访问官网</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
             </div>
-            <span class="new-tab-note">先播放出发动画，再前往官网；返回即可继续探索</span>
+            <span class="new-tab-note">先播放出发动画，再在当前标签页前往官网；返回即可继续探索</span>
             <div class="school-search-row">
               <label class="school-search"><span aria-hidden="true">⌕</span><span class="sr-only">搜索学校名称或网址</span><input id="school-search" type="search" placeholder="搜索学校名称或网址" autocomplete="off" aria-controls="school-grid"></label>
               <span id="search-count" class="search-count" role="status"></span>
@@ -68,8 +68,8 @@
           </div>
           <p id="navigation-status" class="navigation-status" role="status" aria-live="polite"></p>
         </form>
-        <noscript><div class="fallback"><p>已为你准备好学校官网入口：</p><a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></div></noscript>
-        <p id="load-error" class="fallback" hidden>学校列表暂时无法加载。你仍可<a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></p>
+        <noscript><div class="fallback"><p>已为你准备好学校官网入口：</p><a href="https://www.hnust.edu.cn/">访问湖南科技大学官网 ↗</a></div></noscript>
+        <p id="load-error" class="fallback" hidden>学校列表暂时无法加载。你仍可<a href="https://www.hnust.edu.cn/">访问湖南科技大学官网 ↗</a></p>
       </section>
       <div class="bottom-note"><span class="small-sparkle" aria-hidden="true">✳</span><p>更多校园，等你来解锁。<span>后续将陆续添加新的学校入口。</span></p></div>
     </main>
