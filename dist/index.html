@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f6ef">
-  <meta name="description" content="中国奶娃科技大学校园导航。选择学校官网，或点击逛一逛，随机探索一个已加入的网址。">
-  <title>中国奶娃科技大学 · 校园导航</title>
+  <meta name="description" content="中国奶蛙科技大学校园导航。选择学校官网，或点击逛一逛，随机探索一个已加入的网址。">
+  <title>中国奶蛙科技大学 · 校园导航</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <script src="./schools.js" defer></script>
@@ -15,9 +15,9 @@
   <a class="skip-link" href="#destinations">跳到学校选择</a>
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="中国奶娃科技大学 首页">
+      <a class="brand" href="./" aria-label="中国奶蛙科技大学 首页">
         <span class="brand-icon" aria-hidden="true"><img src="./mascot.jpg" alt="" width="1536" height="2048"></span>
-        <span class="brand-copy"><strong>中国奶娃科技大学</strong><span>NAIWA CAMPUS</span></span>
+        <span class="brand-copy"><strong>中国奶蛙科技大学</strong><span>NAIWA CAMPUS</span></span>
       </a>
       <span class="header-note"><span class="status-dot"></span>你的校园，从这里出发</span>
     </header>
@@ -27,13 +27,13 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> 校园官网导航 <span class="eyebrow-line"></span> CAMPUS PORTAL</div>
           <h1 id="page-title">你的下一站，<br><span class="highlight">由你选择。<svg viewBox="0 0 360 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 10C95 2 245 2 356 9"/></svg></span></h1>
-          <p class="hero-description">选一所学校，或让奶娃替你决定。<br>每一次出发，都可能遇见新的惊喜。</p>
+          <p class="hero-description">选一所学校，或让奶蛙替你决定。<br>每一次出发，都可能遇见新的惊喜。</p>
         </div>
         <div class="hero-art" aria-hidden="true">
           <div class="art-circle"></div><div class="orbit orbit-one"></div>
           <span class="art-star star-one">✦</span><span class="art-star star-two">✧</span>
           <span class="floating-label"><span class="status-dot"></span> READY TO EXPLORE</span>
-          <img class="mascot" src="./mascot.jpg" alt="中国奶娃科技大学吉祥物" width="1536" height="2048">
+          <img class="mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048">
           <span class="art-caption">世界很大，出发吧 <span>↗</span></span>
         </div>
       </section>
@@ -41,7 +41,6 @@
       <section id="destinations" class="destinations" aria-labelledby="destinations-title">
         <div class="section-heading"><div><span class="section-index">01 /</span><h2 id="destinations-title">选择你的目的地</h2></div><p id="school-count">学校官网入口</p></div>
         <form id="destination-form" hidden>
-          <fieldset><legend class="sr-only">选择要访问的学校官网</legend><div id="school-grid" class="school-grid"></div></fieldset>
           <div class="departure-bar">
             <div class="selection-summary"><span class="direction-icon" aria-hidden="true">↗</span><div><span class="summary-label">即将前往</span><p id="selected-name"></p><span id="selected-domain" class="selected-domain"></span></div></div>
             <div class="departure-action">
@@ -54,6 +53,12 @@
           </div>
           <p id="explore-note" class="explore-note"></p>
           <p id="navigation-status" class="navigation-status" role="status" aria-live="polite"></p>
+          <div class="school-search-row">
+            <label class="school-search"><span aria-hidden="true">⌕</span><span class="sr-only">搜索学校名称或网址</span><input id="school-search" type="search" placeholder="搜索学校名称或网址" autocomplete="off" aria-controls="school-grid"></label>
+            <span id="search-count" class="search-count" role="status"></span>
+          </div>
+          <fieldset><legend class="sr-only">选择要访问的学校官网</legend><div id="school-grid" class="school-grid"></div></fieldset>
+          <p id="no-results" class="no-results" hidden>没有找到匹配的学校，请换个关键词试试。</p>
         </form>
         <noscript><div class="fallback"><p>已为你准备好学校官网入口：</p><a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></div></noscript>
         <p id="load-error" class="fallback" hidden>学校列表暂时无法加载。你仍可<a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></p>
@@ -61,7 +66,7 @@
       <div class="bottom-note"><span class="small-sparkle" aria-hidden="true">✳</span><p>更多校园，等你来解锁。<span>后续将陆续添加新的学校入口。</span></p></div>
     </main>
 
-    <footer class="site-footer"><span>中国奶娃科技大学 <span class="footer-divider">/</span> 校园官网导航</span><span>个人创意导航页 · 非高校官方网站</span><span class="footer-sign">STAY CURIOUS. <span aria-hidden="true">↗</span></span></footer>
+    <footer class="site-footer"><span>中国奶蛙科技大学 <span class="footer-divider">/</span> 校园官网导航</span><span>个人创意导航页 · 非高校官方网站</span><span class="footer-sign">STAY CURIOUS. <span aria-hidden="true">↗</span></span></footer>
   </div>
 </body>
 </html>

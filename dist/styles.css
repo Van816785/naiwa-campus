@@ -22,3 +22,17 @@
 @media(max-width:900px){.mascot{width:225px;height:290px}.hero-art{height:290px}.departure-buttons{gap:9px}.depart-button{gap:20px;padding-left:16px;padding-right:16px}.explore-button{padding-left:16px;padding-right:16px}.selection-summary{gap:10px}}
 @media(max-width:640px){.brand-icon img{width:70px;height:93px;left:-11px;top:-4px}.hero-art{height:255px;margin-top:15px}.mascot{width:203px;height:255px}.art-circle{top:30px}.orbit{top:73px}.floating-label{top:28px;right:3%}.art-caption{left:10%;bottom:0}.departure-buttons{display:grid;grid-template-columns:1fr 1.65fr;gap:9px}.depart-button{font-size:12px;gap:8px;padding:14px 12px;white-space:nowrap}.explore-button{font-size:13px;padding:14px 12px;gap:7px}.explore-button svg{width:18px;height:18px}.explore-note{font-size:10px;margin:10px 3px 0}.departure-bar{padding:17px}.art-star.star-two{bottom:38px}}
 @media(max-width:350px){.departure-buttons{grid-template-columns:1fr}.explore-button{min-height:46px}.depart-button{justify-content:center;gap:16px}.floating-label{right:0}}
+
+/* 学校名录：随时搜索，随机探索始终涵盖完整名单。 */
+.departure-bar{margin-top:0}
+.school-search-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:22px 0 13px}
+.school-search{display:flex;align-items:center;gap:10px;flex:1;max-width:430px;border:1px solid #b7c2ad;border-radius:10px;padding:10px 14px;background:var(--white)}
+.school-search:focus-within{outline:2px solid #587a4b;outline-offset:2px}
+.school-search>span:first-child{font-size:23px;line-height:1}
+.school-search input{min-width:0;width:100%;border:0;background:transparent;color:var(--ink);font-size:13px;outline:none}
+.school-search input::placeholder{color:#77816f}
+.search-count{font-size:11px;color:#69775f;white-space:nowrap}
+.school-grid{max-height:470px;overflow-y:auto;padding:6px;scrollbar-width:thin;scrollbar-color:#b8c5aa transparent;overscroll-behavior:contain;align-content:start}
+.school-meta{padding-right:52px;overflow-wrap:anywhere;line-height:1.5}
+.no-results{padding:35px 16px;margin:0;text-align:center;font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+@media(max-width:640px){.school-search-row{flex-wrap:wrap;gap:10px}.school-search{max-width:none;flex-basis:100%}.search-count{font-size:10px}.school-grid{max-height:440px}.school-option{min-height:148px}.departure-bar{margin-top:0}}
