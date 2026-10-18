@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">戴学士帽的小黄龙</title>
+  <desc id="desc">一只圆润友好的黄色小龙，戴着墨绿色学士帽，拿着浅绿色校园通行卡。</desc>
+  <defs>
+    <linearGradient id="body" x1="163" y1="206" x2="303" y2="355" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFDB72"/>
+      <stop offset="1" stop-color="#F9BE43"/>
+    </linearGradient>
+    <linearGradient id="face" x1="184" y1="97" x2="292" y2="244" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE38A"/>
+      <stop offset="1" stop-color="#FFD169"/>
+    </linearGradient>
+    <linearGradient id="belly" x1="238" y1="246" x2="238" y2="345" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1BB"/>
+      <stop offset="1" stop-color="#FFE59A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- A light grounding shadow keeps the artwork airy on any warm background. -->
+  <ellipse cx="241" cy="371" rx="144" ry="14" fill="#DEC992" opacity=".27"/>
+
+  <!-- Tail and its three rounded dorsal fins. -->
+  <path d="M157 282C128 302 102 302 85 278C82 274 76 276 77 282C83 329 117 353 165 333L181 315" fill="#F9C552" stroke="#244A3C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M83 288L75 304C73 309 76 312 81 311L93 308M98 316L94 333C93 338 97 340 101 337L113 327M122 331L126 347C128 351 132 350 134 346L140 334" fill="#D99E30" stroke="#244A3C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Back arm, torso, and feet. -->
+  <path d="M170 236C148 242 130 264 132 285C133 300 146 305 156 295L178 269" fill="#FFD369" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M171 218C144 243 141 292 156 327C169 355 194 363 236 363C281 363 310 349 317 318C324 285 306 241 289 224C259 203 202 202 171 218Z" fill="url(#body)" stroke="#244A3C" stroke-width="4"/>
+  <path d="M239 239C206 239 184 263 184 298C184 331 207 345 240 345C276 345 292 325 288 296C284 265 267 239 239 239Z" fill="url(#belly)"/>
+  <path d="M170 326C150 328 137 343 141 357C145 372 193 374 206 362C216 352 209 340 201 336" fill="#FFD36A" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M274 336C266 340 260 352 269 361C282 374 330 371 333 357C337 342 324 329 306 327" fill="#FFD36A" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M156 353L156 358M170 356L170 361M305 356L305 361M319 353L319 358" stroke="#C69838" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Small horns emerge from the oversized, softly sculpted head. -->
+  <path d="M145 133C132 126 122 111 129 99C134 91 143 98 146 106L155 122" fill="#FFF1BD" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M301 121C312 111 318 97 327 103C338 111 330 128 320 136" fill="#FFF1BD" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M151 113C169 88 203 79 240 83C282 86 309 104 322 135C328 149 330 160 328 174C347 192 343 217 325 233C304 251 270 259 230 257C188 256 151 244 133 224C116 204 118 186 129 170C129 149 137 128 151 113Z" fill="url(#face)" stroke="#244A3C" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="M152 140C155 126 166 115 180 109" stroke="#FFF0B9" stroke-width="9" stroke-linecap="round" opacity=".9"/>
+  <path d="M135 202C138 223 158 238 186 246" stroke="#EEB84D" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+
+  <!-- Bright eyes and a small, calm smile. -->
+  <ellipse cx="188" cy="166" rx="10.5" ry="15.5" fill="#244A3C"/>
+  <ellipse cx="279" cy="166" rx="10.5" ry="15.5" fill="#244A3C"/>
+  <ellipse cx="191" cy="161" rx="3.1" ry="4.4" fill="#FFF9E7"/>
+  <ellipse cx="282" cy="161" rx="3.1" ry="4.4" fill="#FFF9E7"/>
+  <path d="M177 143C183 140 190 140 196 143M271 143C277 140 284 140 290 144" stroke="#B78932" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="158" cy="197" rx="17" ry="10" fill="#F3A16B" opacity=".7"/>
+  <ellipse cx="309" cy="197" rx="17" ry="10" fill="#F3A16B" opacity=".7"/>
+  <path d="M204 207C216 220 250 221 263 207" stroke="#244A3C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M229 227C234 229 240 229 245 227" stroke="#E8AD45" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="225" cy="190" rx="3.2" ry="2.5" fill="#C89B40"/>
+  <ellipse cx="244" cy="190" rx="3.2" ry="2.5" fill="#C89B40"/>
+
+  <!-- The cap is tilted slightly to keep the character informal and friendly. -->
+  <path d="M168 76L171 108C196 96 243 94 278 106L280 74" fill="#244A3C" stroke="#173A2D" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M111 69L222 32L336 68L225 106L111 69Z" fill="#244A3C" stroke="#173A2D" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M128 69L222 39L314 68" stroke="#416752" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M226 68L305 82L307 130" stroke="#EDBC4E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="226" cy="68" rx="6" ry="3.5" fill="#EDBC4E"/>
+  <path d="M307 124C302 124 298 140 301 147C303 151 313 150 314 146C316 140 312 124 307 124Z" fill="#E9B344" stroke="#244A3C" stroke-width="2.5"/>
+  <path d="M306 133L305 145M310 133L310 145" stroke="#FFD982" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Campus pass: no lettering, just a miniature building and punched slot. -->
+  <g transform="rotate(9 343 268)">
+    <rect x="304" y="213" width="101" height="114" rx="13" fill="#163F32" opacity=".12"/>
+    <rect x="301" y="208" width="101" height="114" rx="13" fill="#E3EBDD" stroke="#244A3C" stroke-width="4"/>
+    <path d="M314 208H389C396 208 402 214 402 221V239H301V221C301 214 307 208 314 208Z" fill="#416752"/>
+    <rect x="337" y="217" width="29" height="5" rx="2.5" fill="#D2DCC6"/>
+    <path d="M321 268L351 252L381 268H321Z" fill="#C0CEB6" stroke="#416752" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M328 271V294M343 271V294M359 271V294M374 271V294" stroke="#416752" stroke-width="5"/>
+    <path d="M320 296H382M330 304H372" stroke="#416752" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="351" cy="263" r="3" fill="#416752"/>
+  </g>
+
+  <!-- Foreground hand clasps the edge of the pass. -->
+  <path d="M292 259C299 250 309 247 319 251L336 259C345 263 346 272 340 277C336 280 331 279 326 277C339 283 338 292 331 295C324 299 315 294 305 289C296 285 287 278 292 259Z" fill="#FFD571" stroke="#244A3C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M310 267L326 277" stroke="#D9A63C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Sparse sparkles echo the rounded drawing language. -->
+  <path d="M94 175V189M87 182H101" stroke="#D7AC4F" stroke-width="3" stroke-linecap="round"/>
+  <path d="M377 130V150M367 140H387" stroke="#C0CEB6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="402" cy="172" r="4" fill="#D7AC4F"/>
+  <circle cx="111" cy="235" r="3" fill="#C0CEB6"/>
+</svg>

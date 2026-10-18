@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6ef">
+  <meta name="description" content="中华奶龙科技大学校园导航。选择你的目的地，一键访问湖南科技大学等学校官网。">
+  <title>中华奶龙科技大学 · 校园导航</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./schools.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#destinations">跳到学校选择</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="中华奶龙科技大学 首页">
+        <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M9 21c-3-2-4-6-1-9l-1-5 6 3c5-3 12 1 12 7 0 5-5 8-10 7l-5 2 1-5" fill="currentColor"/><circle cx="20" cy="15" r="1.4" fill="#ffda60"/></svg></span>
+        <span class="brand-copy"><strong>中华奶龙科技大学</strong><span>NAILONG CAMPUS</span></span>
+      </a>
+      <span class="header-note"><span class="status-dot"></span>你的校园，从这里出发</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> 校园官网导航 <span class="eyebrow-line"></span> CAMPUS PORTAL</div>
+          <h1 id="page-title">你的下一站，<br><span class="highlight">由你选择。<svg viewBox="0 0 360 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 10C95 2 245 2 356 9"/></svg></span></h1>
+          <p class="hero-description">先选一所学校，再出发。<br class="mobile-break">让每一次探索，都有一个轻松的开始。</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-circle"></div><div class="orbit orbit-one"></div>
+          <span class="art-star star-one">✦</span><span class="art-star star-two">✧</span>
+          <span class="floating-label"><span class="status-dot"></span> READY TO EXPLORE</span>
+          <img class="mascot" src="./mascot.svg" alt="" width="480" height="400">
+          <span class="art-caption">世界很大，出发吧 <span>↗</span></span>
+        </div>
+      </section>
+
+      <section id="destinations" class="destinations" aria-labelledby="destinations-title">
+        <div class="section-heading"><div><span class="section-index">01 /</span><h2 id="destinations-title">选择你的目的地</h2></div><p id="school-count">学校官网入口</p></div>
+        <form id="destination-form" hidden>
+          <fieldset><legend class="sr-only">选择要访问的学校官网</legend><div id="school-grid" class="school-grid"></div></fieldset>
+          <div class="departure-bar">
+            <div class="selection-summary"><span class="direction-icon" aria-hidden="true">↗</span><div><span class="summary-label">即将前往</span><p id="selected-name"></p><span id="selected-domain" class="selected-domain"></span></div></div>
+            <div class="departure-action"><button type="submit" class="depart-button"><span>出发，访问官网</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><span class="new-tab-note">在新标签页打开，随时回来继续探索</span></div>
+          </div>
+          <p id="navigation-status" class="navigation-status" role="status" aria-live="polite"></p>
+        </form>
+        <noscript><div class="fallback"><p>已为你准备好学校官网入口：</p><a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></div></noscript>
+        <p id="load-error" class="fallback" hidden>学校列表暂时无法加载。你仍可<a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener noreferrer">访问湖南科技大学官网 ↗</a></p>
+      </section>
+      <div class="bottom-note"><span class="small-sparkle" aria-hidden="true">✳</span><p>更多校园，等你来解锁。<span>后续将陆续添加新的学校入口。</span></p></div>
+    </main>
+
+    <footer class="site-footer"><span>中华奶龙科技大学 <span class="footer-divider">/</span> 校园官网导航</span><span>个人创意导航页 · 非高校官方网站</span><span class="footer-sign">STAY CURIOUS. <span aria-hidden="true">↗</span></span></footer>
+  </div>
+</body>
+</html>
