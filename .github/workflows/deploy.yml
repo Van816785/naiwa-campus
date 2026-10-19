@@ -23,15 +23,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Check deployment configuration
-        shell: bash
-        run: |
-          for key in TCB_SECRET_ID TCB_SECRET_KEY TCB_ENV_ID; do
-            if [ -z "${!key}" ]; then
-              echo "::error::Missing repository Actions secret: $key"
-              exit 1
-            fi
-          done
+      - name: Prepare deployment configuration
+        run: node .github/scripts/prepare-cloudbase-env.cjs
 
       - name: Install CloudBase CLI
         run: npm install -g @cloudbase/cli
