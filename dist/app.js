@@ -65,14 +65,12 @@
   departureOverlay.setAttribute("aria-label", "出发视频");
   departureOverlay.innerHTML = '<div class="departure-dialog"><div class="departure-stage">' +
     '<video class="departure-video" src="./transit.mp4" playsinline webkit-playsinline preload="metadata" controls></video>' +
-    '<div class="departure-fallback" hidden><img class="departure-mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048"><p class="departure-text">官网同步打开中</p></div></div>' +
+    '<div class="departure-fallback" hidden><img class="departure-mascot" src="./mascot.jpg" alt="中国奶蛙科技大学吉祥物" width="1536" height="2048"><p class="departure-text">准备前往官网</p></div></div>' +
     '<div class="departure-controls"><p class="departure-title"></p><p class="departure-hint" role="status"></p>' +
-    '<div class="departure-buttons"><a class="departure-skip" href="https://www.hnust.edu.cn/">结束视频，查看官网</a><button class="departure-continue" type="button">继续看完</button></div>' +
-    '<a class="departure-direct" href="https://www.hnust.edu.cn/">在当前页打开官网</a>' +
-    '<p class="departure-browser-note">如果浏览器切到了官网，可返回本页继续看视频。</p></div></div>';
+    '<div class="departure-buttons"><a class="departure-skip" href="https://www.hnust.edu.cn/">跳过视频，立即进入</a><button class="departure-continue" type="button">继续看完</button></div>' +
+    '<p class="departure-browser-note">视频结束后将自动前往官网。后台加载受学校网站限制，进入时可能仍需等待。</p></div></div>';
   document.body.append(departureOverlay);
   const skipLink = departureOverlay.querySelector(".departure-skip");
-  const directLink = departureOverlay.querySelector(".departure-direct");
   const continueButton = departureOverlay.querySelector(".departure-continue");
   const hint = departureOverlay.querySelector(".departure-hint");
   const video = departureOverlay.querySelector(".departure-video");
@@ -80,36 +78,21 @@
   const exploreButton = document.getElementById("explore-button");
   let navigationBusy = false;
   let activeCancel = null;
-  let activeVisit = null;
+  let preloadFrame = null;
   const setBusy = busy => {
     navigationBusy = busy;
     visitButton.disabled = busy; exploreButton.disabled = busy;
   };
   const resetDeparture = () => {
     if (activeCancel) activeCancel();
+    if (preloadFrame) { preloadFrame.remove(); preloadFrame = null; }
     departureOverlay.hidden = true; setBusy(false);
   };
-  const focusDestination = visit => {
-    try {
-      if (visit && visit.popup && !visit.popup.closed) {
-        visit.popup.focus();
-        return true;
-      }
-    } catch { /* 官网隔离策略可能切断窗口引用；保留普通链接。 */ }
-    return false;
-  };
-  const viewDestination = (event, visit) => {
-    // 复用已经打开的窗口，不再次导航，以保留官网正在进行或已完成的加载。
-    if (focusDestination(visit)) event.preventDefault();
-    resetDeparture();
-  };
-  skipLink.addEventListener("click", event => viewDestination(event, activeVisit));
-  directLink.addEventListener("click", resetDeparture);
+  // 普通链接在微信等浏览器中也可由用户直接打开，无需弹出窗口。
+  skipLink.addEventListener("click", resetDeparture);
   continueButton.addEventListener("click", () => {
     continueButton.hidden = true;
-    hint.textContent = activeVisit && activeVisit.popup
-      ? "继续播放视频。官网已另外打开，可随时切换查看。"
-      : "继续播放视频。需要前往官网时，请点击打开入口。";
+    hint.textContent = "继续播放视频，播放结束后会自动进入官网。";
     // 用户可能通过原生控件暂停过视频，继续观看仍属于本次点击。
     try { const playing = video.play(); if (playing && playing.catch) playing.catch(() => {}); } catch {}
   });
@@ -118,7 +101,6 @@
 
   const playDeparture = onDone => {
     const fallback = departureOverlay.querySelector(".departure-fallback");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { onDone(); return; }
     let done = false; let waitingTimer = 0; let fallbackTimer = 0;
     let fallbackShown = false;
     const cleanup = () => {
@@ -133,7 +115,7 @@
       if (done || fallbackShown) return;
       fallbackShown = true; clearTimeout(waitingTimer); video.pause();
       video.hidden = true; fallback.hidden = false;
-      hint.textContent = "视频暂时无法播放。官网打开不受影响，可以直接查看。";
+      hint.textContent = "视频暂时无法播放，即将自动进入官网。";
       fallbackTimer = setTimeout(finish, 1200);
     };
     const clearWaiting = () => { clearTimeout(waitingTimer); };
@@ -142,7 +124,7 @@
       if (!done && !fallbackShown && !document.hidden) waitingTimer = setTimeout(useFallback, 5000);
     };
     const onVisibility = () => {
-      // 切到官网时，手机可能暂停视频。保留播放进度，返回后由用户继续。
+      // 切换应用时保留播放进度，返回后可继续，不用计时器假定视频结束。
       if (document.hidden) clearWaiting();
       else if (!video.paused && video.readyState < 3) armWaiting();
     };
@@ -169,41 +151,39 @@
     startVideo(true);
     skipLink.focus({ preventScroll: true });
   };
-  const openDestination = school => {
-    let popup = null;
-    try {
-      // 必须同步发生在用户点击中；不等待视频、定时器或网络探测。
-      popup = window.open("about:blank", "_blank");
-      if (!popup) return null;
-      popup.opener = null;
-      popup.location.replace(school.url);
-      return popup;
-    } catch {
-      try { if (popup) popup.close(); } catch {}
-      return null;
-    }
+  const preloadDestination = school => {
+    // 仅尝试后台加载。跨域 iframe 的 load 事件无法证明官网成功或完整加载，
+    // 因此不据此跳转，也不显示“官网已准备好”。正式导航可能重新请求资源。
+    const frame = document.createElement("iframe");
+    frame.className = "destination-preload";
+    frame.title = school.name + "后台加载";
+    frame.tabIndex = -1;
+    frame.setAttribute("aria-hidden", "true");
+    frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
+    frame.setAttribute("allow", "autoplay 'none'; fullscreen 'none'");
+    frame.referrerPolicy = "no-referrer";
+    frame.loading = "eager";
+    frame.src = school.url;
+    preloadFrame = frame;
+    document.body.append(frame);
   };
   const visit = (school, random = false) => {
     if (navigationBusy) return;
     setBusy(true);
-    const visitState = { school, popup: openDestination(school) };
-    activeVisit = visitState;
-    skipLink.href = directLink.href = school.url;
+    skipLink.href = school.url;
     departureOverlay.querySelector(".departure-title").textContent = school.name;
-    hint.textContent = visitState.popup
-      ? "官网已在新页面开始打开，视频在本页同步播放。"
-      : "浏览器未允许打开新页面。你可以现在打开官网，或继续看视频。";
-    skipLink.textContent = visitState.popup ? "结束视频，查看官网" : "结束视频，打开官网";
+    hint.textContent = "正在尝试后台加载官网。视频结束后，将在当前页面自动进入。";
     status.textContent = (random ? "这次奶蛙选中了" + school.name + "。" : "") +
-      (visitState.popup ? "官网已另外打开；视频播放不会阻挡官网加载。" : "浏览器未允许新页面，请使用官网入口。");
+      "视频播放中，结束后自动前往官网。";
     const fallbackLink = document.createElement("a");
     fallbackLink.href = school.url; fallbackLink.textContent = "查看" + school.name + "官网 ↗";
-    fallbackLink.addEventListener("click", event => viewDestination(event, visitState));
+    fallbackLink.addEventListener("click", resetDeparture);
     status.append(" ", fallbackLink);
+    preloadDestination(school);
     playDeparture(() => {
-      setBusy(false);
-      // 结束时只尝试切换到已经打开的官网，不重新请求、不再创建窗口。
-      if (!document.hidden) focusDestination(visitState);
+      resetDeparture();
+      // ended 表示视频真正结束，当前页导航不依赖新窗口权限。
+      window.location.assign(school.url);
     });
   };
   form.addEventListener("change", updateSelection);

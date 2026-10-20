@@ -91,3 +91,6 @@
 .departure-direct{display:inline-block;margin-top:12px;font-size:12px;text-underline-offset:3px}
 .departure-browser-note{font-size:10px;line-height:1.5;color:var(--muted);margin:10px 0 0}
 @media(max-height:550px){.departure-dialog{display:flex;gap:14px;align-items:center;width:min(650px,100%)}.departure-stage{width:min(35%,calc(85vh*0.5625));flex-shrink:0}.departure-controls{flex:1;padding:0}}
+
+/* 后台加载不占据视口，也不能遮挡视频或接收点击。 */
+.destination-preload { position: fixed; left: -10000px; top: 0; width: 1px; height: 1px; border: 0; opacity: 0; pointer-events: none; }

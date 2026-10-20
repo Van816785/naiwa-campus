@@ -3,82 +3,48 @@
     {
       "name": "Chrome",
       "version": "151.0.7922.34",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
-      "passed": true
-    },
-    {
-      "name": "Firefox",
-      "version": "153.0",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
       "passed": true
     },
     {
       "name": "Edge",
       "version": "155.0.4283.62",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
+      "passed": true
+    },
+    {
+      "name": "Firefox",
+      "version": "153.0",
       "passed": true
     },
     {
       "name": "WebKit",
       "version": "26.5",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
       "passed": true
     },
     {
-      "name": "iPhone WebKit emulation",
+      "name": "iPhone WebKit simulation",
       "version": "26.5",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
       "passed": true
     },
     {
-      "name": "WeChat UA on Android emulation (not real WeChat)",
+      "name": "Android WeChat UA simulation (not real WeChat)",
       "version": "151.0.7922.34",
-      "checks": [
-        "school request starts during trusted click while video plays, opener isolated, repeat click guarded",
-        "continue retains video; ending video reuses already loaded school without reload",
-        "video completion does not create another window or reload target; navigation can repeat",
-        "random still uses all 43 schools and updates destination; repeat video starts at beginning",
-        "popup-blocked simulation has honest status and immediate native same-tab fallback",
-        "reduced motion still opens school immediately, without showing video"
-      ],
       "passed": true
     }
   ],
   "passed": true,
-  "limits": "Headless desktop engines and mobile emulation; not real WeChat or Safari application. External school responses intercepted."
+  "checks": [
+    "background request while staying on site",
+    "no popup or early top navigation",
+    "sandbox blocks frame-busting",
+    "natural video completion in Chrome",
+    "ended triggers same-tab navigation",
+    "pause and continue",
+    "back navigation resets state",
+    "X-Frame-Options denial does not block navigation",
+    "early native link",
+    "random from all schools",
+    "video failure fallback",
+    "mobile controls fit"
+  ],
+  "limits": "External school responses intercepted. Mobile emulation is not real WeChat or Safari."
 }
